@@ -10,3 +10,11 @@ extension JSObject {
     }
 }
 
+extension JSValue {
+    public subscript<T: ConvertibleToJSValue & ConstructibleFromJSValue>(dynamicMember name: String) -> T? {
+        get { T.construct(from: object![name]) }
+        set { object![name] = newValue.jsValue }
+    }
+}
+
+
